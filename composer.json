@@ -1,11 +1,11 @@
 {
-  "name": "xparse/:recursive_pagination",
-  "description": ":recursive_pagination",
+  "name": "xparse/recursive-pagination",
+  "description": "Recursive Pagination",
   "keywords": [
     "xparse",
     "pagination"
   ],
-  "homepage": "https://github.com/php-loep/:package_name",
+  "homepage": "https://github.com/xparse/recursive-pagination",
   "license": "MIT",
   "authors": [
     {
