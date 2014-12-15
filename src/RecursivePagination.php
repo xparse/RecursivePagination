@@ -35,7 +35,7 @@
       return $this;
     }
 
-    public function getNextPaginationPage()
+    public function getNextPage()
     {
       $page = $this->grabber->getLastPage();
       if (!empty($page)) {
