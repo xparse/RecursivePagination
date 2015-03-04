@@ -1,11 +1,11 @@
 {
-  "name": "xparse/recursive-pagination",
+  "name": "xparse/RecursivePagination",
   "description": "Recursive Pagination",
   "keywords": [
     "xparse",
     "pagination"
   ],
-  "homepage": "https://github.com/xparse/recursive-pagination",
+  "homepage": "https://github.com/xparse/RecursivePagination",
   "license": "MIT",
   "authors": [
     {
