@@ -2,7 +2,7 @@
 
   namespace Xparse\RecursivePagination\Test;
 
-  class ExampleTest extends \PHPUnit_Framework_TestCase
+  class RecursivePaginationTest extends \PHPUnit_Framework_TestCase
   {
 
     public function testAllLinks()
