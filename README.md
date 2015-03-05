@@ -1,11 +1,11 @@
 # Recursive Pagination
 
-[![Latest Version](https://img.shields.io/github/release/xparse/RecursivePagination.svg?style=flat-square)](https://github.com/xparse/RecursivePagination/releases)
+[![Latest Version](https://img.shields.io/packagist/v/xparse/recursive-pagination.svg?style=flat-square)](https://packagist.org/packages/xparse/recursive-pagination)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/xparse/RecursivePagination/master.svg?style=flat-square)](https://travis-ci.org/xparse/RecursivePagination)
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/xparse/RecursivePagination.svg?style=flat-square)](https://scrutinizer-ci.com/g/xparse/RecursivePagination/code-structure)
 [![Quality Score](https://img.shields.io/scrutinizer/g/xparse/RecursivePagination.svg?style=flat-square)](https://scrutinizer-ci.com/g/xparse/RecursivePagination)
-[![Total Downloads](https://img.shields.io/packagist/dt/xparse/RecursivePagination.svg?style=flat-square)](https://packagist.org/packages/xparse/RecursivePagination)
+[![Total Downloads](https://img.shields.io/packagist/dt/xparse/recursive-pagination.svg?style=flat-square)](https://packagist.org/packages/xparse/recursive-pagination)
 
 Recursive Pagination allows you to parse through website pages. You need to set xPath to pagination area and xPath to pages that have such pagination. 
 
@@ -14,7 +14,7 @@ Recursive Pagination allows you to parse through website pages. You need to set 
 Via Composer
 
 ``` bash
-$ composer require xparse/RecursivePagination
+$ composer require xparse/recursive-pagination
 ```
 
 ## Usage
@@ -40,13 +40,13 @@ $ composer require xparse/RecursivePagination
 ## Testing
 
 ``` bash
-$ phpunit
+$ vendor/bin/phpunit
 ```
 
 ## Credits
 
 - [Ganchev Anatoly](https://github.com/ganchclub)
-- [All Contributors](https://github.com/xparse/RecursivePagination/contributors)
+- [All Contributors](https://github.com/xparse/RecursivePagination/graphs/contributors)
 
 ## License
 
