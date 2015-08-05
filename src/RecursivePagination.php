@@ -34,7 +34,7 @@
      */
     public function __construct(Grabber $grabber, $xpath = []) {
       $this->grabber = $grabber;
-      if (!is_string($xpath) && !is_array($xpath)) {
+      if (!is_string($xpath) AND !is_array($xpath)) {
         throw new \Exception('xPath should be an array or a string');
       }
       $xpath = (array) $xpath;
@@ -48,12 +48,23 @@
 
 
     /**
-     * @param $link
+     * @param array|string $links
      * @param bool $state
+     * @throws \Exception
      * @return $this
      */
-    public function addToQueue($link, $state = false) {
-      $this->queue[$link] = $state;
+    public function addToQueue($links = [], $state = false) {
+      if (!is_string($links) AND !is_array($links)) {
+        throw new \Exception('Links should be an array or a string');
+      }
+      $links = (array) $links;
+      foreach ($links as $url) {
+        if (!is_string($url)) {
+          throw new \Exception('url should be a string');
+        }
+        $this->queue[$url] = $state;
+      }
+
       return $this;
     }
 
