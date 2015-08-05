@@ -30,7 +30,7 @@ $ composer require xparse/recursive-pagination
   $paginator->addToQueue('http://www.example.com/first/page/to/parse.html');
 
   $allLinks = [];
-    while ($page = $paginator->getNextPaginationPage()) {
+    while ($page = $paginator->getNextPage()) {
     $adsList = $page->attribute("//div[@class='itemdetails']//a/@href")->getItems();
     $allLinks = array_values(array_unique(array_merge($allLinks, $adsList)));
   }
