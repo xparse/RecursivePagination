@@ -2,41 +2,66 @@
 
   namespace Xparse\RecursivePagination;
 
-  use Doctrine\Instantiator\Exception\InvalidArgumentException;
-  use Fiv\Parser\Exception;
 
-  class RecursivePagination
-  {
+  use Fiv\Parser\Grabber;
 
-    protected $queue = array();
+  /**
+   *
+   * @package Xparse\RecursivePagination
+   */
+  class RecursivePagination {
 
+    /**
+     * @var array
+     */
+    protected $queue = [];
+
+    /**
+     * @var Grabber|null
+     */
     protected $grabber = null;
 
-    protected $defaultXpath = array();
+    /**
+     * @var array
+     */
+    protected $defaultXpath = [];
 
-    public function __construct(\Fiv\Parser\Grabber $grabber, $xpath = array())
-    {
+
+    /**
+     * @param Grabber $grabber
+     * @param array $xpath
+     * @throws \Exception
+     */
+    public function __construct(Grabber $grabber, $xpath = []) {
       $this->grabber = $grabber;
       if (!is_string($xpath) && !is_array($xpath)) {
-        throw new \InvalidArgumentException('xPath should be an array or a string');
+        throw new \Exception('xPath should be an array or a string');
       }
-      $xpath = (array)$xpath;
+      $xpath = (array) $xpath;
       foreach ($xpath as $path) {
         if (!is_string($path)) {
-          throw new \InvalidArgumentException('Incorrect xPath, should be an array or a string');
+          throw new \Exception('Incorrect xPath, should be an array or a string');
         }
         $this->defaultXpath[] = $path;
       }
     }
 
-    public function addToQueue($link, $state = false)
-    {
+
+    /**
+     * @param $link
+     * @param bool $state
+     * @return $this
+     */
+    public function addToQueue($link, $state = false) {
       $this->queue[$link] = $state;
       return $this;
     }
 
-    public function getNextPage()
-    {
+
+    /**
+     * @return \Fiv\Parser\Dom\ElementFinder|null
+     */
+    public function getNextPage() {
       $page = $this->grabber->getLastPage();
       if (!empty($page)) {
         foreach ($this->defaultXpath as $xPath) {
