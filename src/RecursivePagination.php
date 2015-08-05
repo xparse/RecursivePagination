@@ -34,13 +34,13 @@
      */
     public function __construct(Grabber $grabber, $xpath = []) {
       $this->grabber = $grabber;
-      if (!is_string($xpath) AND !is_array($xpath)) {
-        throw new \Exception('xPath should be an array or a string');
+      if (!is_string($xpath) and !is_array($xpath)) {
+        throw new \InvalidArgumentException('xPath should be an array or a string');
       }
       $xpath = (array) $xpath;
       foreach ($xpath as $path) {
         if (!is_string($path)) {
-          throw new \Exception('Incorrect xPath, should be an array or a string');
+          throw new \InvalidArgumentException('Incorrect xPath, should be an array or a string');
         }
         $this->defaultXpath[] = $path;
       }
@@ -53,14 +53,14 @@
      * @throws \Exception
      * @return $this
      */
-    public function addToQueue($links = [], $state = false) {
-      if (!is_string($links) AND !is_array($links)) {
-        throw new \Exception('Links should be an array or a string');
+    public function addToQueue($links, $state = false) {
+      if (!is_string($links) and !is_array($links)) {
+        throw new \InvalidArgumentException('Links should be an array or a string');
       }
       $links = (array) $links;
       foreach ($links as $url) {
         if (!is_string($url)) {
-          throw new \Exception('url should be a string');
+          throw new \InvalidArgumentException('url should be a string');
         }
         $this->queue[$url] = $state;
       }
