@@ -30,12 +30,23 @@ $ composer require xparse/recursive-pagination
   $paginator->addToQueue('http://www.example.com/first/page/to/parse.html');
 
   $allLinks = [];
-    while ($page = $paginator->getNextPage()) {
+  while ($page = $paginator->getNextPage()) {
+    $adsList = $page->attribute("//div[@class='itemdetails']//a/@href")->getItems();
+    $allLinks = array_values(array_unique(array_merge($allLinks, $adsList)));
+  }
+  print_r($allLinks);
+  
+```
+You can also specify custom xpath string or array to getNextPage() method
+
+```php
+  while ($page = $paginator->getNextPage("//a[@class='pagination']/@href")) {
     $adsList = $page->attribute("//div[@class='itemdetails']//a/@href")->getItems();
     $allLinks = array_values(array_unique(array_merge($allLinks, $adsList)));
   }
   print_r($allLinks);
 ```
+
 
 ## Testing
 
