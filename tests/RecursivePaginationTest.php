@@ -73,82 +73,50 @@
 
 
     /**
-     * Asserts that InvalidArgumentException is thrown while passing a string to default xpath
-     *
+     * @expectedException InvalidArgumentException
      */
     public function testXpathCorrectString() {
       $grabber = new TestGrabber();
       $linksArrayPath = $grabber;  // passing wrong path 
 
-      $exception = null;
-      try {
-        new RecursivePagination($grabber, $linksArrayPath);
-      } catch (InvalidArgumentException $e) {
-        $this->assertTrue(true);
-        return;
-      }
-      $this->fail('Unexpected exception type');
+      new RecursivePagination($grabber, $linksArrayPath);
     }
 
 
     /**
-     * Asserts that InvalidArgumentException is thrown while passing an array to default xpath
-     *
+     * @expectedException InvalidArgumentException
      */
     public function testXpathCorrectArray() {
       $grabber = new TestGrabber();
       $linksArrayPath = ["//span[@class='inner'][1]/a/@href", "//a[@class='pagenav']/@href", $grabber];  // passing wrong path
 
-      $exception = null;
-      try {
-        new RecursivePagination($grabber, $linksArrayPath);
-      } catch (InvalidArgumentException $e) {
-        $this->assertTrue(true);
-        return;
-      }
-      $this->fail('Unexpected exception type');
+      new RecursivePagination($grabber, $linksArrayPath);
     }
 
 
     /**
-     * Asserts that InvalidArgumentException is thrown while passing array of links to queue
-     *
+     * @expectedException InvalidArgumentException
      */
     public function testAddToQueueLinksArray() {
       $grabber = new TestGrabber();
       $linksArrayPath = ["//span[@class='inner']/a/@href", "//a[@class='pagenav']/@href"];
 
-      $exception = null;
-      try {
-        $paginator = new RecursivePagination($grabber, $linksArrayPath);
-        $paginator->addToQueue([
-          'osmosis/page1.html',
-          $grabber, //wrong link
-        ]);
-      } catch (InvalidArgumentException $e) {
-        $this->assertTrue(true);
-        return;
-      }
-      $this->fail('Unexpected exception type');
+      $paginator = new RecursivePagination($grabber, $linksArrayPath);
+      $paginator->addToQueue([
+        'osmosis/page1.html',
+        $grabber, //wrong link
+      ]);
     }
 
 
     /**
-     * Asserts that InvalidArgumentException is thrown while passing one link to queue
-     *
+     * @expectedException InvalidArgumentException
      */
     public function testAddToQueueLink() {
       $grabber = new TestGrabber();
       $linksArrayPath = ["//span[@class='inner']/a/@href", "//a[@class='pagenav']/@href"];
 
-      $exception = null;
-      try {
-        $paginator = new RecursivePagination($grabber, $linksArrayPath);
-        $paginator->addToQueue($grabber); //wrong link
-      } catch (InvalidArgumentException $e) {
-        $this->assertTrue(true);
-        return;
-      }
-      $this->fail('Unexpected exception type');
+      $paginator = new RecursivePagination($grabber, $linksArrayPath);
+      $paginator->addToQueue($grabber); //wrong link
     }
   }
