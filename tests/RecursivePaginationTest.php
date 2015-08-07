@@ -2,15 +2,25 @@
 
   namespace Xparse\RecursivePagination\Test;
 
-  class RecursivePaginationTest extends \PHPUnit_Framework_TestCase
-  {
+  use InvalidArgumentException;
+  use Xparse\RecursivePagination\RecursivePagination;
 
-    public function testAllLinks()
-    {
-      $grabber = new \Xparse\RecursivePagination\Test\TestGrabber();
+  /**
+   *
+   * @package Xparse\RecursivePagination\Test
+   */
+  class RecursivePaginationTest extends \PHPUnit_Framework_TestCase {
+
+
+    /**
+     * Asserts that $allLinks array has 22 elements.
+     *
+     */
+    public function testAllLinks() {
+      $grabber = new TestGrabber();
       $linksArrayPath = ["//span[@class='inner']/a/@href", "//a[@class='pagenav']/@href"];
 
-      $paginator = new \Xparse\RecursivePagination\RecursivePagination($grabber, $linksArrayPath);
+      $paginator = new RecursivePagination($grabber, $linksArrayPath);
       $paginator->addToQueue('osmosis/page1.html');
 
       $allLinks = [];
@@ -21,12 +31,16 @@
       $this->assertTrue(count($allLinks) == 22);
     }
 
-    public function testOneLink()
-    {
-      $grabber = new \Xparse\RecursivePagination\Test\TestGrabber();
+
+    /**
+     * Asserts that $allLinks array has 10 elements.
+     *
+     */
+    public function testOneLink() {
+      $grabber = new TestGrabber();
       $linksArrayPath = ["//span[@class='inner'][1]/a/@href", "//a[@class='pagenav']/@href"];
 
-      $paginator = new \Xparse\RecursivePagination\RecursivePagination($grabber, $linksArrayPath);
+      $paginator = new RecursivePagination($grabber, $linksArrayPath);
       $paginator->addToQueue('osmosis/page1.html');
 
       $allLinks = [];
@@ -37,37 +51,104 @@
       $this->assertTrue(count($allLinks) == 10);
     }
 
-    /*
-     * @expectedException \InvalidArgumentException
+
+    /**
+     * Asserts that $allLinks array has 10 elements.
+     *
      */
-    public function testXpathCorrectString()
-    {
-      $grabber = new \Xparse\RecursivePagination\Test\TestGrabber();
+    public function testGetNextPageCustomPath() {
+      $grabber = new TestGrabber();
+      $linksArrayPath = ["//span[@class='inner'][1]/a/@href"];
+
+      $paginator = new RecursivePagination($grabber, $linksArrayPath);
+      $paginator->addToQueue('osmosis/page1.html');
+
+      $allLinks = [];
+      while ($page = $paginator->getNextPage("//a[@class='pagenav']/@href")) {
+        $adsList = $page->attribute("//h2/a/@href")->getItems();
+        $allLinks = array_values(array_unique(array_merge($allLinks, $adsList)));
+      }
+      $this->assertTrue(count($allLinks) == 10);
+    }
+
+
+    /**
+     * Asserts that InvalidArgumentException is thrown while passing a string to default xpath
+     *
+     */
+    public function testXpathCorrectString() {
+      $grabber = new TestGrabber();
+      $linksArrayPath = $grabber;  // passing wrong path 
+
+      $exception = null;
+      try {
+        new RecursivePagination($grabber, $linksArrayPath);
+      } catch (InvalidArgumentException $e) {
+        $this->assertTrue(true);
+        return;
+      }
+      $this->fail('Unexpected exception type');
+    }
+
+
+    /**
+     * Asserts that InvalidArgumentException is thrown while passing an array to default xpath
+     *
+     */
+    public function testXpathCorrectArray() {
+      $grabber = new TestGrabber();
       $linksArrayPath = ["//span[@class='inner'][1]/a/@href", "//a[@class='pagenav']/@href", $grabber];  // passing wrong path
 
       $exception = null;
       try {
-        $paginator = new \Xparse\RecursivePagination\RecursivePagination($grabber, $linksArrayPath);
-      } catch (\Exception $e) {
-        $exception = $e;
+        new RecursivePagination($grabber, $linksArrayPath);
+      } catch (InvalidArgumentException $e) {
+        $this->assertTrue(true);
+        return;
       }
-      $this->assertInstanceOf('InvalidArgumentException', $exception);
+      $this->fail('Unexpected exception type');
     }
 
-    /*
-     * @expectedException \InvalidArgumentException
+
+    /**
+     * Asserts that InvalidArgumentException is thrown while passing array of links to queue
+     *
      */
-    public function testXpathCorrectArray()
-    {
-      $grabber = new \Xparse\RecursivePagination\Test\TestGrabber();
-      $linksArrayPath = $grabber;  // passing wrong path
+    public function testAddToQueueLinksArray() {
+      $grabber = new TestGrabber();
+      $linksArrayPath = ["//span[@class='inner']/a/@href", "//a[@class='pagenav']/@href"];
 
       $exception = null;
       try {
-        $paginator = new \Xparse\RecursivePagination\RecursivePagination($grabber, $linksArrayPath);
-      } catch (\Exception $e) {
-        $exception = $e;
+        $paginator = new RecursivePagination($grabber, $linksArrayPath);
+        $paginator->addToQueue([
+          'osmosis/page1.html',
+          $grabber, //wrong link
+        ]);
+      } catch (InvalidArgumentException $e) {
+        $this->assertTrue(true);
+        return;
       }
-      $this->assertInstanceOf('InvalidArgumentException', $exception);
+      $this->fail('Unexpected exception type');
+    }
+
+
+    /**
+     * Asserts that InvalidArgumentException is thrown while passing one link to queue
+     *
+     */
+    public function testAddToQueueLink() {
+      $grabber = new TestGrabber();
+      $linksArrayPath = ["//span[@class='inner']/a/@href", "//a[@class='pagenav']/@href"];
+
+      $exception = null;
+      try {
+        $paginator = new RecursivePagination($grabber, $linksArrayPath);
+        $paginator->addToQueue($grabber); //wrong link
+      } catch (InvalidArgumentException $e) {
+        $this->assertTrue(true);
+        return;
+      }
+      $this->fail('Unexpected exception type');
     }
   }
