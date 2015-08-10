@@ -37,7 +37,7 @@ $ composer require xparse/recursive-pagination
   print_r($allLinks);
   
 ```
-You can also specify custom xpath string or array to getNextPage() method
+You can also specify custom xpath string or array to `getNextPage()` method
 
 ```php
   while ($page = $paginator->getNextPage("//a[@class='pagination']/@href")) {
