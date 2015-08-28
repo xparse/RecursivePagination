@@ -33,7 +33,9 @@
      */
     public function __construct(Grabber $grabber, $xpath = null) {
       $this->grabber = $grabber;
-      $this->addXpath($xpath);
+      if (isset($xpath)) {
+        $this->addXpath($xpath);
+      }
     }
 
 

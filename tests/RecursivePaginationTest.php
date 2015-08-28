@@ -53,6 +53,25 @@
 
 
     /**
+     * Asserts that $allLinks array has 2 elements. Checking only first page, without pagination Xpath
+     *
+     */
+    public function testOneLinkWithEmptyPaginationXpath() {
+      $grabber = new TestGrabber();
+
+      $paginator = new RecursivePagination($grabber);
+      $paginator->addToQueue('osmosis/page1.html');
+
+      $allLinks = [];
+      while ($page = $paginator->getNextPage()) {
+        $adsList = $page->attribute("//h2/a/@href")->getItems();
+        $allLinks = array_values(array_unique(array_merge($allLinks, $adsList)));
+      }
+      $this->assertTrue(count($allLinks) == 2);
+    }
+
+
+    /**
      * Asserts that $allLinks array has 10 elements.
      *
      */
