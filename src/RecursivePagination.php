@@ -25,7 +25,7 @@
     /**
      * @var array
      */
-    protected $defaultXpath = [];
+    protected $elementSelector = [];
 
 
     /**
@@ -72,7 +72,7 @@
       }
       $page = $this->parser->getLastPage();
       if (!empty($page)) {
-        foreach ($this->defaultXpath as $xpath) {
+        foreach ($this->elementSelector as $xpath => $state) {
           $queueLinks = $page->attribute($xpath)->getItems();
           if (!empty($queueLinks)) {
             $queueLinks = array_combine($queueLinks, array_fill(0, count($queueLinks), false));
@@ -104,7 +104,7 @@
         if (!is_string($path)) {
           throw new \InvalidArgumentException('Incorrect xpath, should be an array or a string');
         }
-        $this->defaultXpath[] = $path;
+        $this->elementSelector[$path] = true;
       }
     }
 
