@@ -2,14 +2,14 @@
 
   namespace Xparse\RecursivePagination\Test;
 
-  use Fiv\Parser\Grabber;
+  use Xparse\ElementFinder\ElementFinder;
+  use Xparse\Parser\Parser;
 
   /**
    *
    * @package Xparse\RecursivePagination\Test
    */
-  class TestGrabber extends Grabber
-  {
+  class TestParser extends Parser {
 
     /**
      * @return string
@@ -21,12 +21,12 @@
 
     /**
      * @param string $url
-     * @return \Fiv\Parser\Dom\ElementFinder
+     * @return ElementFinder
      */
-    public function getHtml($url){
-         
+    public function get($url) {
+
       $fileData = file_get_contents($this->fileDataPath() . $url);
-      $this->lastPage = new \Fiv\Parser\Dom\ElementFinder($fileData);
+      $this->lastPage = new ElementFinder($fileData);
       return $this->lastPage;
     }
   }

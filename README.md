@@ -20,13 +20,13 @@ $ composer require xparse/recursive-pagination
 ## Usage
 
 ```php
-  $grabber = new \Fiv\Parser\Grabber();
+  $parser = new \Xparse\Parser\Parser();
   $linksArrayPath = [
       "//a[@class='categoryitem']/@href",     // path to pages you want to scrape
       "//td[@class='pagination']//a/@href"    // path to pagination area
     ];
   
-  $paginator = new RecursivePagination($grabber, $linksArrayPath);
+  $paginator = new RecursivePagination($parser, $linksArrayPath);
   $paginator->addToQueue('http://www.example.com/first/page/to/parse.html');
 
   $allLinks = [];

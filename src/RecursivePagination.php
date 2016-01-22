@@ -3,7 +3,8 @@
   namespace Xparse\RecursivePagination;
 
 
-  use Fiv\Parser\Grabber;
+  use Xparse\ElementFinder\ElementFinder;
+  use Xparse\Parser\Parser;
 
   /**
    *
@@ -17,9 +18,9 @@
     protected $queue = [];
 
     /**
-     * @var Grabber|null
+     * @var Parser|null
      */
-    protected $grabber = null;
+    protected $parser = null;
 
     /**
      * @var array
@@ -28,11 +29,11 @@
 
 
     /**
-     * @param Grabber $grabber
+     * @param Parser $parser
      * @param null $xpath
      */
-    public function __construct(Grabber $grabber, $xpath = null) {
-      $this->grabber = $grabber;
+    public function __construct(Parser $parser, $xpath = null) {
+      $this->parser = $parser;
       if (isset($xpath)) {
         $this->addXpath($xpath);
       }
@@ -63,13 +64,13 @@
 
     /**
      * @param null $customXpath
-     * @return \Fiv\Parser\Dom\ElementFinder|null
+     * @return ElementFinder|null
      */
     public function getNextPage($customXpath = null) {
       if (isset($customXpath)) {
         $this->addXpath($customXpath);
       }
-      $page = $this->grabber->getLastPage();
+      $page = $this->parser->getLastPage();
       if (!empty($page)) {
         foreach ($this->defaultXpath as $xpath) {
           $queueLinks = $page->attribute($xpath)->getItems();
@@ -86,7 +87,7 @@
       }
 
       $this->queue[$link] = true;
-      return $this->grabber->getHtml($link);
+      return $this->parser->get($link);
     }
 
 

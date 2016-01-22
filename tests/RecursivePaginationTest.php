@@ -17,10 +17,10 @@
      *
      */
     public function testAllLinks() {
-      $grabber = new TestGrabber();
+      $parser = new TestParser();
       $linksArrayPath = ["//span[@class='inner']/a/@href", "//a[@class='pagenav']/@href"];
 
-      $paginator = new RecursivePagination($grabber, $linksArrayPath);
+      $paginator = new RecursivePagination($parser, $linksArrayPath);
       $paginator->addToQueue('osmosis/page1.html');
 
       $allLinks = [];
@@ -37,10 +37,10 @@
      *
      */
     public function testOneLink() {
-      $grabber = new TestGrabber();
+      $parser = new TestParser();
       $linksArrayPath = ["//span[@class='inner'][1]/a/@href", "//a[@class='pagenav']/@href"];
 
-      $paginator = new RecursivePagination($grabber, $linksArrayPath);
+      $paginator = new RecursivePagination($parser, $linksArrayPath);
       $paginator->addToQueue('osmosis/page1.html');
 
       $allLinks = [];
@@ -57,9 +57,9 @@
      *
      */
     public function testOneLinkWithEmptyPaginationXpath() {
-      $grabber = new TestGrabber();
+      $parser = new TestParser();
 
-      $paginator = new RecursivePagination($grabber);
+      $paginator = new RecursivePagination($parser);
       $paginator->addToQueue('osmosis/page1.html');
 
       $allLinks = [];
@@ -76,10 +76,10 @@
      *
      */
     public function testGetNextPageCustomPath() {
-      $grabber = new TestGrabber();
+      $parser = new TestParser();
       $linksArrayPath = ["//span[@class='inner'][1]/a/@href"];
 
-      $paginator = new RecursivePagination($grabber, $linksArrayPath);
+      $paginator = new RecursivePagination($parser, $linksArrayPath);
       $paginator->addToQueue('osmosis/page1.html');
 
       $allLinks = [];
@@ -95,10 +95,10 @@
      * @expectedException InvalidArgumentException
      */
     public function testXpathCorrectString() {
-      $grabber = new TestGrabber();
-      $linksArrayPath = $grabber;  // passing wrong path 
+      $parser = new TestParser();
+      $linksArrayPath = $parser;  // passing wrong path 
 
-      new RecursivePagination($grabber, $linksArrayPath);
+      new RecursivePagination($parser, $linksArrayPath);
     }
 
 
@@ -106,10 +106,10 @@
      * @expectedException InvalidArgumentException
      */
     public function testXpathCorrectArray() {
-      $grabber = new TestGrabber();
-      $linksArrayPath = ["//span[@class='inner'][1]/a/@href", "//a[@class='pagenav']/@href", $grabber];  // passing wrong path
+      $parser = new TestParser();
+      $linksArrayPath = ["//span[@class='inner'][1]/a/@href", "//a[@class='pagenav']/@href", $parser];  // passing wrong path
 
-      new RecursivePagination($grabber, $linksArrayPath);
+      new RecursivePagination($parser, $linksArrayPath);
     }
 
 
@@ -117,13 +117,13 @@
      * @expectedException InvalidArgumentException
      */
     public function testAddToQueueLinksArray() {
-      $grabber = new TestGrabber();
+      $parser = new TestParser();
       $linksArrayPath = ["//span[@class='inner']/a/@href", "//a[@class='pagenav']/@href"];
 
-      $paginator = new RecursivePagination($grabber, $linksArrayPath);
+      $paginator = new RecursivePagination($parser, $linksArrayPath);
       $paginator->addToQueue([
         'osmosis/page1.html',
-        $grabber, //wrong link
+        $parser, //wrong link
       ]);
     }
 
@@ -132,10 +132,10 @@
      * @expectedException InvalidArgumentException
      */
     public function testAddToQueueLink() {
-      $grabber = new TestGrabber();
+      $parser = new TestParser();
       $linksArrayPath = ["//span[@class='inner']/a/@href", "//a[@class='pagenav']/@href"];
 
-      $paginator = new RecursivePagination($grabber, $linksArrayPath);
-      $paginator->addToQueue($grabber); //wrong link
+      $paginator = new RecursivePagination($parser, $linksArrayPath);
+      $paginator->addToQueue($parser); //wrong link
     }
   }
