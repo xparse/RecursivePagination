@@ -24,7 +24,7 @@
       $paginator->addToQueue('osmosis/page1.html');
 
       $allLinks = [];
-      while ($page = $paginator->getNextPage()) {
+      while (($page = $paginator->getNextPage())) {
         $adsList = $page->attribute("//h2/a/@href")->getItems();
         $allLinks = array_values(array_unique(array_merge($allLinks, $adsList)));
       }
@@ -44,7 +44,7 @@
       $paginator->addToQueue('osmosis/page1.html');
 
       $allLinks = [];
-      while ($page = $paginator->getNextPage()) {
+      while (($page = $paginator->getNextPage())) {
         $adsList = $page->attribute("//h2/a/@href")->getItems();
         $allLinks = array_values(array_unique(array_merge($allLinks, $adsList)));
       }
@@ -63,7 +63,7 @@
       $paginator->addToQueue('osmosis/page1.html');
 
       $allLinks = [];
-      while ($page = $paginator->getNextPage()) {
+      while (($page = $paginator->getNextPage())) {
         $adsList = $page->attribute("//h2/a/@href")->getItems();
         $allLinks = array_values(array_unique(array_merge($allLinks, $adsList)));
       }
@@ -83,7 +83,7 @@
       $paginator->addToQueue('osmosis/page1.html');
 
       $allLinks = [];
-      while ($page = $paginator->getNextPage("//a[@class='pagenav']/@href")) {
+      while (($page = $paginator->getNextPage("//a[@class='pagenav']/@href"))) {
         $adsList = $page->attribute("//h2/a/@href")->getItems();
         $allLinks = array_values(array_unique(array_merge($allLinks, $adsList)));
       }
