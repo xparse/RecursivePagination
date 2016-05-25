@@ -20,7 +20,7 @@
   },
   "require-dev": {
     "phpunit/phpunit": "4.*",
-    "xparse/Parser": "0.0.*"
+    "xparse/parser": "0.1.0-alpha.2"
   },
   "autoload": {
     "psr-4": {
@@ -30,11 +30,6 @@
   "autoload-dev": {
     "psr-4": {
       "Xparse\\RecursivePagination\\Test\\": "tests"
-    }
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "1.0-dev"
     }
   }
 }
