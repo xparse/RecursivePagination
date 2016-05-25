@@ -11,7 +11,7 @@ All Notable changes to `RecursivePagination` will be documented in this file
 ## 0.0.4 [2016-05-18]
 
 ### Changed
-- use Xparse/Parser instead of Fix/Parser
+- use `Xparse/Parser` instead of `Fiv/Parser`
 
 ### Fixed
 - package name fixed
