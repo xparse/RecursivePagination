@@ -9,6 +9,9 @@ All Notable changes to `RecursivePagination` will be documented in this file
 ### Deprecated
 - Remove first parameter from `RecursivePagination::getNextPage()` method
 
+### Fixed
+- Use `ElementFinder::value()` method instead of `ElementFinder::attribute()` to get attribute 
+
 ## 0.0.5 [2016-05-25]
 
 ### Changed

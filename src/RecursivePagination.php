@@ -73,7 +73,7 @@
       $page = $this->parser->getLastPage();
       if (!empty($page)) {
         foreach ($this->elementSelector as $expression => $state) {
-          $queueLinks = $page->attribute($expression)->getItems();
+          $queueLinks = $page->value($expression)->getItems();
           if (!empty($queueLinks)) {
             $queueLinks = array_combine($queueLinks, array_fill(0, count($queueLinks), false));
             $this->queue = array_merge($queueLinks, $this->queue);

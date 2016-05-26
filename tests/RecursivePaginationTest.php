@@ -25,7 +25,7 @@
 
       $allLinks = [];
       while (($page = $paginator->getNextPage())) {
-        $adsList = $page->attribute("//h2/a/@href")->getItems();
+        $adsList = $page->value("//h2/a/@href")->getItems();
         $allLinks = array_values(array_unique(array_merge($allLinks, $adsList)));
       }
       $this->assertTrue(count($allLinks) == 22);
@@ -45,7 +45,7 @@
 
       $allLinks = [];
       while (($page = $paginator->getNextPage())) {
-        $adsList = $page->attribute("//h2/a/@href")->getItems();
+        $adsList = $page->value("//h2/a/@href")->getItems();
         $allLinks = array_values(array_unique(array_merge($allLinks, $adsList)));
       }
       $this->assertTrue(count($allLinks) == 10);
@@ -79,7 +79,7 @@
 
       $allLinks = [];
       while (($page = $paginator->getNextPage())) {
-        $adsList = $page->attribute("//h2/a/@href")->getItems();
+        $adsList = $page->value("//h2/a/@href")->getItems();
         $allLinks = array_values(array_unique(array_merge($allLinks, $adsList)));
       }
       $this->assertTrue(count($allLinks) == 10);
