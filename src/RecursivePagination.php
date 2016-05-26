@@ -35,7 +35,7 @@
     public function __construct(Parser $parser, $expression) {
       $this->parser = $parser;
 
-      $this->addExpression($expression);
+      $this->setExpression($expression);
     }
 
 
@@ -95,16 +95,16 @@
      * @param string|array $expression
      * @throws \InvalidArgumentException
      */
-    private function addExpression($expression) {
+    private function setExpression($expression) {
 
       if (!is_string($expression) and !is_array($expression) or empty($expression)) {
-        throw new \InvalidArgumentException('Expression should be not empty array or string');
+        throw new \InvalidArgumentException('Invalid expression, should be not empty array or string');
       }
 
       $expression = (array) $expression;
       foreach ($expression as $path) {
-        if (!is_string($path)) {
-          throw new \InvalidArgumentException('Invalid expression, should be a string');
+        if (!is_string($path) or empty($path)) {
+          throw new \InvalidArgumentException('Invalid expression, should be not empty string');
         }
         $this->elementSelector[$path] = true;
       }
