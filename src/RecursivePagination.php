@@ -34,6 +34,11 @@
      */
     public function __construct(Parser $parser, $xpath = null) {
       $this->parser = $parser;
+
+      if (!is_string($xpath) and !is_array($xpath)) {
+        throw new \InvalidArgumentException('Xpath should be an array or a string');
+      }
+
       if (isset($xpath)) {
         $this->addXpath($xpath);
       }
@@ -63,13 +68,14 @@
 
 
     /**
-     * @param null $customXpath
      * @return ElementFinder|null
      */
-    public function getNextPage($customXpath = null) {
-      if (isset($customXpath)) {
-        $this->addXpath($customXpath);
+    public function getNextPage() {
+
+      if (func_num_args() > 0) {
+        trigger_error('This method doesn\'t have arguments', E_USER_DEPRECATED);
       }
+
       $page = $this->parser->getLastPage();
       if (!empty($page)) {
         foreach ($this->elementSelector as $xpath => $state) {

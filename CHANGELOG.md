@@ -1,7 +1,13 @@
 # Changelog
 All Notable changes to `RecursivePagination` will be documented in this file
 
-## Unreleased
+## Unreleased 0.1.0-alpha.1
+
+### Added
+- Xpath check added in constructor whether it's a string or an array 
+
+### Deprecated
+- remove parameter from `RecursivePagination::getNextPage()` method
 
 ## 0.0.5 [2016-05-25]
 
