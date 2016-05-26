@@ -56,10 +56,10 @@
      * @expectedException \InvalidArgumentException
      *
      */
-    public function testEmptyXpath() {
+    public function testInvalidExpression() {
       $parser = new TestParser();
 
-      new RecursivePagination($parser);
+      new RecursivePagination($parser, []);
     }
 
 
@@ -89,7 +89,7 @@
     /**
      * @expectedException InvalidArgumentException
      */
-    public function testXpathCorrectString() {
+    public function testValidStringExpression() {
       $parser = new TestParser();
       $linksArrayPath = $parser;  // passing wrong path 
 
@@ -100,7 +100,7 @@
     /**
      * @expectedException InvalidArgumentException
      */
-    public function testXpathCorrectArray() {
+    public function testValidArrayExpression() {
       $parser = new TestParser();
       $linksArrayPath = ["//span[@class='inner'][1]/a/@href", "//a[@class='pagenav']/@href", $parser];  // passing wrong path
 
