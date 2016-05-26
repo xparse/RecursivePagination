@@ -30,13 +30,12 @@
 
     /**
      * @param Parser $parser
-     * @param null $xpath
+     * @param string|array $expression
      */
-    public function __construct(Parser $parser, $xpath = null) {
+    public function __construct(Parser $parser, $expression) {
       $this->parser = $parser;
-      if (isset($xpath)) {
-        $this->addXpath($xpath);
-      }
+
+      $this->setExpression($expression);
     }
 
 
@@ -63,17 +62,18 @@
 
 
     /**
-     * @param null $customXpath
      * @return ElementFinder|null
      */
-    public function getNextPage($customXpath = null) {
-      if (isset($customXpath)) {
-        $this->addXpath($customXpath);
+    public function getNextPage() {
+
+      if (func_num_args() > 0) {
+        trigger_error('This method doesn\'t have arguments', E_USER_DEPRECATED);
       }
+
       $page = $this->parser->getLastPage();
       if (!empty($page)) {
-        foreach ($this->elementSelector as $xpath => $state) {
-          $queueLinks = $page->attribute($xpath)->getItems();
+        foreach ($this->elementSelector as $expression => $state) {
+          $queueLinks = $page->attribute($expression)->getItems();
           if (!empty($queueLinks)) {
             $queueLinks = array_combine($queueLinks, array_fill(0, count($queueLinks), false));
             $this->queue = array_merge($queueLinks, $this->queue);
@@ -92,17 +92,19 @@
 
 
     /**
-     * @param string|array $xpath
+     * @param string|array $expression
      * @throws \InvalidArgumentException
      */
-    private function addXpath($xpath) {
-      if (!is_string($xpath) and !is_array($xpath)) {
-        throw new \InvalidArgumentException('Xpath should be an array or a string');
+    private function setExpression($expression) {
+
+      if (!is_string($expression) and !is_array($expression) or empty($expression)) {
+        throw new \InvalidArgumentException('Invalid expression, should be not empty array or string');
       }
-      $xpath = (array) $xpath;
-      foreach ($xpath as $path) {
-        if (!is_string($path)) {
-          throw new \InvalidArgumentException('Incorrect xpath, should be an array or a string');
+
+      $expression = (array) $expression;
+      foreach ($expression as $path) {
+        if (!is_string($path) or empty($path)) {
+          throw new \InvalidArgumentException('Invalid expression, should be not empty string');
         }
         $this->elementSelector[$path] = true;
       }

@@ -53,21 +53,13 @@
 
 
     /**
-     * Asserts that $allLinks array has 2 elements. Checking only first page, without pagination Xpath
+     * @expectedException \InvalidArgumentException
      *
      */
-    public function testOneLinkWithEmptyPaginationXpath() {
+    public function testInvalidExpression() {
       $parser = new TestParser();
 
-      $paginator = new RecursivePagination($parser);
-      $paginator->addToQueue('osmosis/page1.html');
-
-      $allLinks = [];
-      while (($page = $paginator->getNextPage())) {
-        $adsList = $page->attribute("//h2/a/@href")->getItems();
-        $allLinks = array_values(array_unique(array_merge($allLinks, $adsList)));
-      }
-      $this->assertTrue(count($allLinks) == 2);
+      new RecursivePagination($parser, []);
     }
 
 
@@ -77,13 +69,16 @@
      */
     public function testGetNextPageCustomPath() {
       $parser = new TestParser();
-      $linksArrayPath = ["//span[@class='inner'][1]/a/@href"];
+      $linksArrayPath = [
+        "//span[@class='inner'][1]/a/@href",
+        "//a[@class='pagenav']/@href",
+      ];
 
       $paginator = new RecursivePagination($parser, $linksArrayPath);
       $paginator->addToQueue('osmosis/page1.html');
 
       $allLinks = [];
-      while (($page = $paginator->getNextPage("//a[@class='pagenav']/@href"))) {
+      while (($page = $paginator->getNextPage())) {
         $adsList = $page->attribute("//h2/a/@href")->getItems();
         $allLinks = array_values(array_unique(array_merge($allLinks, $adsList)));
       }
@@ -94,7 +89,7 @@
     /**
      * @expectedException InvalidArgumentException
      */
-    public function testXpathCorrectString() {
+    public function testValidStringExpression() {
       $parser = new TestParser();
       $linksArrayPath = $parser;  // passing wrong path 
 
@@ -105,7 +100,7 @@
     /**
      * @expectedException InvalidArgumentException
      */
-    public function testXpathCorrectArray() {
+    public function testValidArrayExpression() {
       $parser = new TestParser();
       $linksArrayPath = ["//span[@class='inner'][1]/a/@href", "//a[@class='pagenav']/@href", $parser];  // passing wrong path
 
