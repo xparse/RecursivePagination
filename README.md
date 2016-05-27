@@ -7,46 +7,43 @@
 [![Quality Score](https://img.shields.io/scrutinizer/g/xparse/RecursivePagination.svg?style=flat-square)](https://scrutinizer-ci.com/g/xparse/RecursivePagination)
 [![Total Downloads](https://img.shields.io/packagist/dt/xparse/recursive-pagination.svg?style=flat-square)](https://packagist.org/packages/xparse/recursive-pagination)
 
-Recursive Pagination allows you to parse through website pages. You need to set xPath to pagination area and xPath to pages that have such pagination. 
+Recursive Pagination allows you to parse website pages recursively. 
+You need to pass link from where to start and set next page expression (xPath, css, etc). 
 
-## Install
+## Installation
 
-Via Composer
+You can install the package via Composer
 
 ``` bash
 $ composer require xparse/recursive-pagination
 ```
 
-## Usage
+## Basic Usage
+
+Try to find all links to the repositories on github. Our query will be `xparse`.
+With recursive pagination we can traverse all pagination links and process each resulting page to fetch repositories links.  
 
 ```php
-  $parser = new \Xparse\Parser\Parser();
-  $linksArrayPath = [
-      "//a[@class='categoryitem']/@href",     // path to pages you want to scrape
-      "//td[@class='pagination']//a/@href"    // path to pagination area
-    ];
+  use Xparse\Parser\Parser;
+  use Xparse\RecursivePagination\RecursivePagination;
   
-  $paginator = new RecursivePagination($parser, $linksArrayPath);
-  $paginator->addToQueue('http://www.example.com/first/page/to/parse.html');
+  # init Parser
+  $parser = new Parser();
+
+  # set expression to pagination links
+  $paginator = new RecursivePagination($parser, "//*[@class='pagination']//a/@href");
+  # set initial page url
+  $paginator->addToQueue('https://github.com/search?q=xparse');
 
   $allLinks = [];
-  while ($page = $paginator->getNextPage()) {
-    $adsList = $page->attribute("//div[@class='itemdetails']//a/@href")->getItems();
-    $allLinks = array_values(array_unique(array_merge($allLinks, $adsList)));
-  }
-  print_r($allLinks);
-  
-```
-You can also specify custom xpath string or array to `getNextPage()` method
-
-```php
-  while ($page = $paginator->getNextPage("//a[@class='pagination']/@href")) {
-    $adsList = $page->attribute("//div[@class='itemdetails']//a/@href")->getItems();
+  while (($page = $paginator->getNextPage())) {
+    # set expression to fetch repository links
+    $adsList = $page->value("//*[@class='repo-list-name']//a/@href")->getItems();
+    # merge and remove duplicates
     $allLinks = array_values(array_unique(array_merge($allLinks, $adsList)));
   }
   print_r($allLinks);
 ```
-
 
 ## Testing
 
@@ -56,7 +53,7 @@ $ vendor/bin/phpunit
 
 ## Credits
 
-- [Ganchev Anatoly](https://github.com/ganchclub)
+- [Ganchev Anatolii](https://github.com/ganchclub)
 - [All Contributors](https://github.com/xparse/RecursivePagination/graphs/contributors)
 
 ## License
