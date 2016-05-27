@@ -20,7 +20,7 @@ $ composer require xparse/recursive-pagination
 
 ## Basic Usage
 
-Try to find all links to the repositories on github. Our query will be 'xparse'.
+Try to find all links to the repositories on github. Our query will be `xparse`.
 With recursive pagination we can traverse all pagination links and process each resulting page to fetch repositories links.  
 
 ```php
