@@ -3,7 +3,6 @@
   namespace Xparse\RecursivePagination\Test;
 
   use InvalidArgumentException;
-  use Xparse\Parser\Parser;
   use Xparse\RecursivePagination\RecursivePagination;
 
   /**
@@ -11,25 +10,6 @@
    * @package Xparse\RecursivePagination\Test
    */
   class RecursivePaginationTest extends \PHPUnit_Framework_TestCase {
-
-
-    public function testBasicUsage() {
-
-      $parser = new Parser();
-
-      $githubUrl = 'https://github.com/search?q=xparse';
-      $paginator = new RecursivePagination($parser, "//*[@class='pagination']//a/@href");
-      $paginator->addToQueue($githubUrl);
-
-      $countResults = $parser->get($githubUrl)->match('!found (\d+) repository results!iu')->getFirst();
-
-      $allLinks = [];
-      while (($page = $paginator->getNextPage())) {
-        $adsList = $page->value("//*[@class='repo-list-name']//a/@href")->getItems();
-        $allLinks = array_values(array_unique(array_merge($allLinks, $adsList)));
-      }
-      $this->assertEquals($countResults, count($allLinks));
-    }
 
 
     /**
