@@ -66,10 +66,6 @@
      */
     public function getNextPage() {
 
-      if (func_num_args() > 0) {
-        trigger_error('This method doesn\'t have arguments', E_USER_DEPRECATED);
-      }
-
       $page = $this->parser->getLastPage();
       if (!empty($page)) {
         foreach ($this->elementSelector as $expression => $state) {

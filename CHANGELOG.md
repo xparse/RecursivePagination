@@ -1,6 +1,14 @@
 # Changelog
 All Notable changes to `RecursivePagination` will be documented in this file
 
+## Unreleased 0.1.0-alpha.2
+
+### Changed
+- dependencies and minimum stability changed in `composer.json`
+
+### Removed
+- removed previously added trigger_error in `RecursivePagination::getNextPage()`
+
 ## 0.1.0-alpha.1 [2016-05-27]
 
 ### Added
