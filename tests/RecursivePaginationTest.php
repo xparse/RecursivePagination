@@ -24,11 +24,12 @@
       $paginator->addToQueue('osmosis/page1.html');
 
       $allLinks = [];
-      while (($page = $paginator->getNextPage())) {
-        $adsList = $page->value("//h2/a/@href")->getItems();
-        $allLinks = array_values(array_unique(array_merge($allLinks, $adsList)));
+      while ($page = $paginator->getNextPage()) {
+        $adsList = $page->value('//h2/a/@href')->getItems();
+        $links = array_unique(array_merge($allLinks, $adsList));
+        $allLinks = array_values($links);
       }
-      $this->assertTrue(count($allLinks) == 22);
+      static::assertCount(22, $allLinks);
     }
 
 
@@ -44,11 +45,12 @@
       $paginator->addToQueue('osmosis/page1.html');
 
       $allLinks = [];
-      while (($page = $paginator->getNextPage())) {
-        $adsList = $page->value("//h2/a/@href")->getItems();
-        $allLinks = array_values(array_unique(array_merge($allLinks, $adsList)));
+      while ($page = $paginator->getNextPage()) {
+        $adsList = $page->value('//h2/a/@href')->getItems();
+        $links = array_unique(array_merge($allLinks, $adsList));
+        $allLinks = array_values($links);
       }
-      $this->assertTrue(count($allLinks) == 10);
+      static::assertCount(10, $allLinks);
     }
 
 
@@ -59,7 +61,7 @@
     public function testInvalidExpression() {
       $parser = new TestParser();
 
-      new RecursivePagination($parser, []);
+      new RecursivePagination($parser, ['', '']);
     }
 
 
@@ -78,11 +80,12 @@
       $paginator->addToQueue('osmosis/page1.html');
 
       $allLinks = [];
-      while (($page = $paginator->getNextPage())) {
-        $adsList = $page->value("//h2/a/@href")->getItems();
-        $allLinks = array_values(array_unique(array_merge($allLinks, $adsList)));
+      while ($page = $paginator->getNextPage()) {
+        $adsList = $page->value('//h2/a/@href')->getItems();
+        $links = array_unique(array_merge($allLinks, $adsList));
+        $allLinks = array_values($links);
       }
-      $this->assertTrue(count($allLinks) == 10);
+      static::assertCount(10, $allLinks);
     }
 
 
@@ -132,5 +135,31 @@
 
       $paginator = new RecursivePagination($parser, $linksArrayPath);
       $paginator->addToQueue($parser); //wrong link
+    }
+
+
+    public function testGetNextPage() {
+
+      $parser = new TestParser();
+      $linksArrayPath = [
+        "//span[@class='inner'][1]/a/@href",
+        "//a[@class='pagenav']/@href",
+      ];
+
+      $paginator = new RecursivePagination($parser, $linksArrayPath);
+      $paginator->addToQueue('osmosis/page1.html');
+
+      $allLinks = [];
+      while ($page = $paginator->getNextPage()) {
+        $adsList = $page->value('//h2/a/@href')->getItems();
+        $links = array_unique(array_merge($allLinks, $adsList));
+
+        # Ensure Parser::get() method will not brake Pagination
+        $heading = $parser->get('index.html')->value('//h1')->getFirst();
+        static::assertEquals('Test index page', $heading);
+
+        $allLinks = array_values($links);
+      }
+      static::assertCount(10, $allLinks);
     }
   }
