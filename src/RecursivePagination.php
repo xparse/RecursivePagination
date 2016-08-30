@@ -47,7 +47,7 @@
      * @return $this
      */
     public function addToQueue($links, $state = false) {
-      if (!is_string($links) && !is_array($links)) {
+      if (!is_string($links) and !is_array($links)) {
         throw new \InvalidArgumentException('Links should be an array or a string');
       }
       foreach ((array) $links as $url) {
@@ -95,7 +95,7 @@
      */
     private function setExpression($expression) {
 
-      if (!is_string($expression) && !is_array($expression)) {
+      if (!is_string($expression) and !is_array($expression)) {
         throw new \InvalidArgumentException('Invalid expression, should be array or string');
       }
 
