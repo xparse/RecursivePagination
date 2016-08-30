@@ -34,7 +34,7 @@
      * @throws \Exception
      */
     public function __construct(Parser $parser, $expression) {
-      $this->parser = clone $parser;
+      $this->parser = $parser;
 
       $this->setExpression($expression);
     }
@@ -68,24 +68,28 @@
      */
     public function getNextPage() {
 
-      $page = $this->parser->getLastPage();
-      if ($page !== null) {
-        foreach ($this->elementSelector as $expression => $state) {
-          $queueLinks = $page->value($expression)->getItems();
-          $countQueueLinks = count($queueLinks);
-          if ($countQueueLinks > 0) {
-            $queueLinks = array_combine($queueLinks, array_fill(0, $countQueueLinks, false));
-            $this->queue = array_merge($queueLinks, $this->queue);
-          }
-        }
-      }
       $link = array_search(false, $this->queue, true);
       if ($link === false) {
         return null;
       }
 
       $this->queue[$link] = true;
-      return $this->parser->get($link);
+      $page = $this->parser->get($link);
+
+      if ($page === null) {
+        return null;
+      }
+
+      foreach ($this->elementSelector as $expression => $state) {
+        $queueLinks = $page->value($expression)->getItems();
+        $countQueueLinks = count($queueLinks);
+        if ($countQueueLinks > 0) {
+          $queueLinks = array_combine($queueLinks, array_fill(0, $countQueueLinks, false));
+          $this->queue = array_merge($queueLinks, $this->queue);
+        }
+      }
+
+      return $page;
     }
 
 
