@@ -18,9 +18,9 @@
     protected $queue = [];
 
     /**
-     * @var Parser|null
+     * @var Parser
      */
-    protected $parser = null;
+    protected $parser;
 
     /**
      * @var array
@@ -31,9 +31,10 @@
     /**
      * @param Parser $parser
      * @param string|array $expression
+     * @throws \Exception
      */
     public function __construct(Parser $parser, $expression) {
-      $this->parser = $parser;
+      $this->parser = clone $parser;
 
       $this->setExpression($expression);
     }
@@ -46,11 +47,10 @@
      * @return $this
      */
     public function addToQueue($links, $state = false) {
-      if (!is_string($links) and !is_array($links)) {
+      if (!is_string($links) && !is_array($links)) {
         throw new \InvalidArgumentException('Links should be an array or a string');
       }
-      $links = (array) $links;
-      foreach ($links as $url) {
+      foreach ((array) $links as $url) {
         if (!is_string($url)) {
           throw new \InvalidArgumentException('url should be a string');
         }
@@ -63,22 +63,24 @@
 
     /**
      * @return ElementFinder|null
+     * @throws \Exception
+     * @throws \InvalidArgumentException
      */
     public function getNextPage() {
 
       $page = $this->parser->getLastPage();
-      if (!empty($page)) {
+      if ($page !== null) {
         foreach ($this->elementSelector as $expression => $state) {
           $queueLinks = $page->value($expression)->getItems();
-          if (!empty($queueLinks)) {
-            $queueLinks = array_combine($queueLinks, array_fill(0, count($queueLinks), false));
+          $countQueueLinks = count($queueLinks);
+          if ($countQueueLinks > 0) {
+            $queueLinks = array_combine($queueLinks, array_fill(0, $countQueueLinks, false));
             $this->queue = array_merge($queueLinks, $this->queue);
           }
         }
       }
       $link = array_search(false, $this->queue, true);
-
-      if (empty($link)) {
+      if ($link === false) {
         return null;
       }
 
@@ -93,14 +95,19 @@
      */
     private function setExpression($expression) {
 
-      if (!is_string($expression) and !is_array($expression) or empty($expression)) {
-        throw new \InvalidArgumentException('Invalid expression, should be not empty array or string');
+      if (!is_string($expression) && !is_array($expression)) {
+        throw new \InvalidArgumentException('Invalid expression, should be array or string');
       }
 
-      $expression = (array) $expression;
+      $expression = array_filter((array) $expression);
+
+      if (count($expression) === 0) {
+        throw new \InvalidArgumentException('Expression might be not empty');
+      }
+
       foreach ($expression as $path) {
-        if (!is_string($path) or empty($path)) {
-          throw new \InvalidArgumentException('Invalid expression, should be not empty string');
+        if (!is_string($path)) {
+          throw new \InvalidArgumentException('Invalid expression, should be a string');
         }
         $this->elementSelector[$path] = true;
       }

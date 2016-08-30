@@ -3,6 +3,9 @@ All Notable changes to `RecursivePagination` will be documented in this file
 
 ## Unreleased 0.1.0-alpha.2
 
+### Fixed
+- `RecursivePagination::getNextPage()` bug fixed: #19 issue
+
 ### Removed
 - First parameter of `RecursivePagination::getNextPage()` method has been removed
 
