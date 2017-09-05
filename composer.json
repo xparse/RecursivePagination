@@ -17,7 +17,7 @@
   ],
   "require": {
     "php": "^7.0",
-    "xparse/parser": "0.1.*"
+    "xparse/parser": "^0.2.0"
   },
   "minimum-stability": "alpha",
   "require-dev": {

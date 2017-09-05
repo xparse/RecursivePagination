@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b0c194cc6c6b70458a6b1d9f178d23ca",
+    "content-hash": "db96d6ad8d32767f977b8f9f9fc142c6",
     "packages": [
         {
             "name": "fiv/collection",
@@ -53,32 +53,35 @@
         },
         {
             "name": "guzzlehttp/guzzle",
-            "version": "6.1.1",
+            "version": "6.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/guzzle.git",
-                "reference": "c6851d6e48f63b69357cbfa55bca116448140e0c"
+                "reference": "f4db5a78a5ea468d4831de7f0bf9d9415e348699"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/c6851d6e48f63b69357cbfa55bca116448140e0c",
-                "reference": "c6851d6e48f63b69357cbfa55bca116448140e0c",
+                "url": "https://api.github.com/repos/guzzle/guzzle/zipball/f4db5a78a5ea468d4831de7f0bf9d9415e348699",
+                "reference": "f4db5a78a5ea468d4831de7f0bf9d9415e348699",
                 "shasum": ""
             },
             "require": {
-                "guzzlehttp/promises": "~1.0",
-                "guzzlehttp/psr7": "~1.1",
-                "php": ">=5.5.0"
+                "guzzlehttp/promises": "^1.0",
+                "guzzlehttp/psr7": "^1.4",
+                "php": ">=5.5"
             },
             "require-dev": {
                 "ext-curl": "*",
-                "phpunit/phpunit": "~4.0",
-                "psr/log": "~1.0"
+                "phpunit/phpunit": "^4.0 || ^5.0",
+                "psr/log": "^1.0"
+            },
+            "suggest": {
+                "psr/log": "Required for using the Log middleware"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "6.1-dev"
+                    "dev-master": "6.2-dev"
                 }
             },
             "autoload": {
@@ -111,32 +114,32 @@
                 "rest",
                 "web service"
             ],
-            "time": "2015-11-23T00:47:50+00:00"
+            "time": "2017-06-22T18:50:49+00:00"
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "1.2.0",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "c10d860e2a9595f8883527fa0021c7da9e65f579"
+                "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/c10d860e2a9595f8883527fa0021c7da9e65f579",
-                "reference": "c10d860e2a9595f8883527fa0021c7da9e65f579",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/a59da6cf61d80060647ff4d3eb2c03a2bc694646",
+                "reference": "a59da6cf61d80060647ff4d3eb2c03a2bc694646",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
+                "phpunit/phpunit": "^4.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -162,20 +165,20 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2016-05-18T16:56:05+00:00"
+            "time": "2016-12-20T10:07:11+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.3.0",
+            "version": "1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "31382fef2889136415751badebbd1cb022a4ed72"
+                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/31382fef2889136415751badebbd1cb022a4ed72",
-                "reference": "31382fef2889136415751badebbd1cb022a4ed72",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
+                "reference": "f5b8a8512e2b58b0071a7280e39f14f72e05d87c",
                 "shasum": ""
             },
             "require": {
@@ -191,7 +194,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -211,29 +214,36 @@
                     "name": "Michael Dowling",
                     "email": "mtdowling@gmail.com",
                     "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Tobias Schultze",
+                    "homepage": "https://github.com/Tobion"
                 }
             ],
-            "description": "PSR-7 message implementation",
+            "description": "PSR-7 message implementation that also provides common utility methods",
             "keywords": [
                 "http",
                 "message",
+                "request",
+                "response",
                 "stream",
-                "uri"
+                "uri",
+                "url"
             ],
-            "time": "2016-04-13T19:56:01+00:00"
+            "time": "2017-03-20T17:10:46+00:00"
         },
         {
             "name": "psr/http-message",
-            "version": "1.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
-                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298"
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
-                "reference": "85d63699f0dbedb190bbd4b0d2b9dc707ea4c298",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
                 "shasum": ""
             },
             "require": {
@@ -261,6 +271,7 @@
                 }
             ],
             "description": "Common interface for HTTP messages",
+            "homepage": "https://github.com/php-fig/http-message",
             "keywords": [
                 "http",
                 "http-message",
@@ -269,7 +280,7 @@
                 "request",
                 "response"
             ],
-            "time": "2015-05-04T20:22:00+00:00"
+            "time": "2016-08-06T14:39:51+00:00"
         },
         {
             "name": "xparse/element-finder",
@@ -363,26 +374,25 @@
         },
         {
             "name": "xparse/parser",
-            "version": "0.1.0-alpha.3",
+            "version": "0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/xparse/Parser.git",
-                "reference": "c708bf74d2829a72b972f18c42242b8072ec7249"
+                "reference": "b7b825a5ae710ea4c18cf55a37e645f8008c4f42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xparse/Parser/zipball/c708bf74d2829a72b972f18c42242b8072ec7249",
-                "reference": "c708bf74d2829a72b972f18c42242b8072ec7249",
+                "url": "https://api.github.com/repos/xparse/Parser/zipball/b7b825a5ae710ea4c18cf55a37e645f8008c4f42",
+                "reference": "b7b825a5ae710ea4c18cf55a37e645f8008c4f42",
                 "shasum": ""
             },
             "require": {
-                "guzzlehttp/guzzle": "6.1.*",
-                "php": ">=5.6.0",
-                "xparse/element-finder": "0.1.*",
-                "xparse/parser-interface": "0.0.3"
+                "guzzlehttp/guzzle": "^6.3",
+                "php": "^7.0",
+                "xparse/element-finder": "^0.1.0@alpha"
             },
             "require-dev": {
-                "phpunit/phpunit": "4.*"
+                "phpunit/phpunit": "^6.3"
             },
             "type": "library",
             "autoload": {
@@ -408,46 +418,7 @@
                 "grabber",
                 "parser"
             ],
-            "time": "2016-06-02T07:35:04+00:00"
-        },
-        {
-            "name": "xparse/parser-interface",
-            "version": "0.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/xparse/ParserInterface.git",
-                "reference": "6582a7afeeaefdbf622c8064622a70273a0fd2c0"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/xparse/ParserInterface/zipball/6582a7afeeaefdbf622c8064622a70273a0fd2c0",
-                "reference": "6582a7afeeaefdbf622c8064622a70273a0fd2c0",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Xparse\\ParserInterface\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Ivan Scherbak",
-                    "email": "dev@funivan.com",
-                    "homepage": "http://funivan.com/",
-                    "role": "Developer"
-                }
-            ],
-            "homepage": "https://github.com/xparse/ParserInterface",
-            "abandoned": true,
-            "time": "2015-07-09T10:43:29+00:00"
+            "time": "2017-09-05T05:57:08+00:00"
         }
     ],
     "packages-dev": [
@@ -1758,6 +1729,44 @@
                 "validate"
             ],
             "time": "2016-11-23T20:04:58+00:00"
+        },
+        {
+            "name": "xparse/parser-interface",
+            "version": "0.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/xparse/ParserInterface.git",
+                "reference": "6582a7afeeaefdbf622c8064622a70273a0fd2c0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/xparse/ParserInterface/zipball/6582a7afeeaefdbf622c8064622a70273a0fd2c0",
+                "reference": "6582a7afeeaefdbf622c8064622a70273a0fd2c0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Xparse\\ParserInterface\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ivan Scherbak",
+                    "email": "dev@funivan.com",
+                    "homepage": "http://funivan.com/",
+                    "role": "Developer"
+                }
+            ],
+            "homepage": "https://github.com/xparse/ParserInterface",
+            "time": "2015-07-09T10:43:29+00:00"
         }
     ],
     "aliases": [],

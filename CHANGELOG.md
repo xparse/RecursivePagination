@@ -1,7 +1,13 @@
 # Changelog
 All Notable changes to `RecursivePagination` will be documented in this file
 
-## Unreleased 0.1.0-alpha.2
+## Unreleased 0.2.0
+
+### Changed
+- update xparse/parser version
+- strict types added
+
+## 0.1.0-alpha.2 [2016-09-22]
 
 ### Fixed
 - `RecursivePagination::getNextPage()` bug fixed: #19 issue
