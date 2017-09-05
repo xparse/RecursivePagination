@@ -14,19 +14,21 @@
     /**
      * @return string
      */
-    protected function fileDataPath() {
+    protected function fileDataPath() : string {
       return __DIR__ . '/test-data/';
     }
 
 
     /**
      * @param string $url
+     * @param array $options
      * @return ElementFinder
      */
-    public function get($url) {
+    public function get(string $url, array $options = []) : ElementFinder {
 
       $fileData = file_get_contents($this->fileDataPath() . $url);
       $this->lastPage = new ElementFinder($fileData);
+
       return $this->lastPage;
     }
   }
