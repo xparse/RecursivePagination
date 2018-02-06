@@ -25,7 +25,7 @@
 
       $allLinks = [];
       while ($page = $paginator->getNextPage()) {
-        $adsList = $page->value('//h2/a/@href')->getItems();
+        $adsList = $page->value('//h2/a/@href')->all();
         $links = array_unique(array_merge($allLinks, $adsList));
         $allLinks = array_values($links);
       }
@@ -46,7 +46,7 @@
 
       $allLinks = [];
       while ($page = $paginator->getNextPage()) {
-        $adsList = $page->value('//h2/a/@href')->getItems();
+        $adsList = $page->value('//h2/a/@href')->all();
         $links = array_unique(array_merge($allLinks, $adsList));
         $allLinks = array_values($links);
       }
@@ -81,7 +81,7 @@
 
       $allLinks = [];
       while ($page = $paginator->getNextPage()) {
-        $adsList = $page->value('//h2/a/@href')->getItems();
+        $adsList = $page->value('//h2/a/@href')->all();
         $links = array_unique(array_merge($allLinks, $adsList));
         $allLinks = array_values($links);
       }
@@ -151,11 +151,11 @@
 
       $allLinks = [];
       while ($page = $paginator->getNextPage()) {
-        $adsList = $page->value('//h2/a/@href')->getItems();
+        $adsList = $page->value('//h2/a/@href')->all();
         $links = array_unique(array_merge($allLinks, $adsList));
 
         # Ensure Parser::get() method will not brake Pagination
-        $heading = $parser->get('index.html')->value('//h1')->getFirst();
+        $heading = $parser->get('index.html')->value('//h1')->first();
         static::assertEquals('Test index page', $heading);
 
         $allLinks = array_values($links);
