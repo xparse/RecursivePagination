@@ -81,7 +81,7 @@
       }
 
       foreach ($this->elementSelector as $expression => $state) {
-        $queueLinks = $page->value($expression)->getItems();
+        $queueLinks = $page->value($expression)->all();
         $countQueueLinks = count($queueLinks);
         if ($countQueueLinks > 0) {
           $queueLinks = array_combine($queueLinks, array_fill(0, $countQueueLinks, false));
