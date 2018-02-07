@@ -8,7 +8,6 @@
 
   /**
    *
-   * @package Xparse\RecursivePagination
    */
   class RecursivePagination {
 

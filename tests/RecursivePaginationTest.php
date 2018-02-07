@@ -1,5 +1,7 @@
 <?php
 
+  declare(strict_types=1);
+
   namespace Xparse\RecursivePagination\Test;
 
   use InvalidArgumentException;
@@ -7,13 +9,11 @@
 
   /**
    *
-   * @package Xparse\RecursivePagination\Test
    */
   class RecursivePaginationTest extends \PHPUnit_Framework_TestCase {
 
 
     /**
-     * Asserts that $allLinks array has 22 elements.
      *
      */
     public function testAllLinks() {
