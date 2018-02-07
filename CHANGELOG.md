@@ -1,6 +1,11 @@
 # Changelog
 All Notable changes to `RecursivePagination` will be documented in this file
 
+## 0.2.1 [2018-02-07]
+
+### Changed
+- update xparse/parser version
+
 ## 0.2.0 [2017-09-05]
 
 ### Changed
