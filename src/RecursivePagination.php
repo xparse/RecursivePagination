@@ -34,7 +34,6 @@
      */
     public function __construct(Parser $parser, $expression) {
       $this->parser = $parser;
-
       $this->setExpression($expression);
     }
 
@@ -84,7 +83,8 @@
         $countQueueLinks = count($queueLinks);
         if ($countQueueLinks > 0) {
           $queueLinks = array_combine($queueLinks, array_fill(0, $countQueueLinks, false));
-          $this->queue = array_merge($queueLinks, $this->queue);
+            /** @noinspection SlowArrayOperationsInLoopInspection */
+            $this->queue = array_merge($queueLinks, $this->queue);
         }
       }
 
@@ -107,7 +107,6 @@
       if (count($expression) === 0) {
         throw new \InvalidArgumentException('Expression might be not empty');
       }
-
       foreach ($expression as $path) {
         if (!is_string($path)) {
           throw new \InvalidArgumentException('Invalid expression, should be a string');
