@@ -5,12 +5,13 @@
   namespace Xparse\RecursivePagination\Test;
 
   use InvalidArgumentException;
+  use PHPUnit\Framework\TestCase;
   use Xparse\RecursivePagination\RecursivePagination;
 
   /**
    *
    */
-  class RecursivePaginationTest extends \PHPUnit_Framework_TestCase {
+  class RecursivePaginationTest extends TestCase {
 
 
     /**
