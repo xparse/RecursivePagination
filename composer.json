@@ -9,6 +9,12 @@
   "license": "MIT",
   "authors": [
     {
+      "name": "Ivan Shcherbak",
+      "email": "alotofall@gmail.com",
+      "homepage": "https://github.com/funivan",
+      "role": "Developer"
+    },
+    {
       "name": "Anatolii Ganchev",
       "email": "ganchclub@gmail.com",
       "homepage": "https://github.com/ganchclub",
@@ -16,12 +22,13 @@
     }
   ],
   "require": {
-    "php": "^7.0",
-    "xparse/parser": "^0.3.0"
+    "php": "^7.1",
+    "xparse/element-finder": "^0.4.0",
+    "xparse/parser": "^0.4.0"
   },
   "minimum-stability": "alpha",
   "require-dev": {
-    "phpunit/phpunit": "^6.5"
+    "phpunit/phpunit": "^7.5"
   },
   "autoload": {
     "psr-4": {
@@ -35,7 +42,7 @@
   },
   "config": {
     "platform": {
-      "php": "7.0.0"
+      "php": "7.1"
     },
     "optimize-autoloader": true,
     "sort-packages": true
