@@ -1,6 +1,9 @@
 # Changelog
 All Notable changes to `RecursivePagination` will be documented in this file
 
+## 0.3.0 [Unreleased]
+- Move to php 7.1
+- Make properties private in the `RecursivePagination`
 ## 0.2.1 [2018-02-07]
 
 ### Changed
