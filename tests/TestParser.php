@@ -17,10 +17,6 @@ class TestParser extends Parser
     }
 
 
-    /**
-     * @param array $options
-     * @throws \Exception
-     */
     final public function get(string $url, array $options = []): ElementFinder
     {
         $this->lastPage = new ElementFinder(
