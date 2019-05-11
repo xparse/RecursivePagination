@@ -3,10 +3,15 @@
 namespace Xparse\RecursivePagination\Test;
 
 use Xparse\ElementFinder\ElementFinder;
-use Xparse\Parser\Parser;
+use Xparse\ElementFinder\ElementFinderInterface;
+use Xparse\Parser\ParserInterface;
 
-class TestParser extends Parser
+class TestParser implements ParserInterface
 {
+    /**
+     * @var ElementFinderInterface|null
+     */
+    private $lastPage;
 
     /**
      * @return string
@@ -17,11 +22,21 @@ class TestParser extends Parser
     }
 
 
-    final public function get(string $url, array $options = []): ElementFinder
+    final public function get(string $url, array $options = []): ElementFinderInterface
     {
         $this->lastPage = new ElementFinder(
             file_get_contents($this->fileDataPath() . $url)
         );
+        return $this->lastPage;
+    }
+
+    final public function post(string $url, array $options): ElementFinderInterface
+    {
+        return $this->get($url, $options);
+    }
+
+    final public function getLastPage(): ?ElementFinderInterface
+    {
         return $this->lastPage;
     }
 }

@@ -9,6 +9,12 @@
   "license": "MIT",
   "authors": [
     {
+      "name": "Ivan Shcherbak",
+      "email": "alotofall@gmail.com",
+      "homepage": "https://github.com/funivan",
+      "role": "Developer"
+    },
+    {
       "name": "Anatolii Ganchev",
       "email": "ganchclub@gmail.com",
       "homepage": "https://github.com/ganchclub",
@@ -17,7 +23,8 @@
   ],
   "require": {
     "php": "^7.1",
-    "xparse/parser": "^0.3.0"
+    "xparse/element-finder": "^0.4.0",
+    "xparse/parser": "^0.4.0"
   },
   "minimum-stability": "alpha",
   "require-dev": {
