@@ -373,16 +373,16 @@
         },
         {
             "name": "xparse/parser",
-            "version": "0.4.0",
+            "version": "0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/xparse/Parser.git",
-                "reference": "14b052f4ab30476ea1b5fcad18c6909f05c65afa"
+                "reference": "7e11488c9849ec773d0948e71168dd0f8b4e7fd8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/xparse/Parser/zipball/14b052f4ab30476ea1b5fcad18c6909f05c65afa",
-                "reference": "14b052f4ab30476ea1b5fcad18c6909f05c65afa",
+                "url": "https://api.github.com/repos/xparse/Parser/zipball/7e11488c9849ec773d0948e71168dd0f8b4e7fd8",
+                "reference": "7e11488c9849ec773d0948e71168dd0f8b4e7fd8",
                 "shasum": ""
             },
             "require": {
@@ -392,7 +392,7 @@
                 "guzzlehttp/psr7": "^1.5",
                 "php": "^7.1",
                 "psr/http-message": "^1.0",
-                "xparse/element-finder": "^0.4",
+                "xparse/element-finder": "^0.4 || ^0.5",
                 "xparse/expression-translator": "0.0.*"
             },
             "require-dev": {
@@ -424,7 +424,7 @@
                 "grabber",
                 "parser"
             ],
-            "time": "2019-05-11T09:08:34+00:00"
+            "time": "2019-05-15T05:47:27+00:00"
         }
     ],
     "packages-dev": [
