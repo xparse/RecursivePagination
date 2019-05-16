@@ -23,7 +23,7 @@
   ],
   "require": {
     "php": "^7.1",
-    "xparse/element-finder": "^0.4.0",
+    "xparse/element-finder": "^0.5.0",
     "xparse/parser": "^0.4.0"
   },
   "minimum-stability": "alpha",
