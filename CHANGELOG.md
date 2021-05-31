@@ -1,6 +1,9 @@
 # Changelog
 All Notable changes to `RecursivePagination` will be documented in this file
 
+## Planned changes
+It is planned to deprecate the library and no longer support it.
+
 ## 0.4.0 [2019-05-11]
 - Move to php 7.1
 - Make properties private in the `RecursivePagination`
